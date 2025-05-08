@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Cleaner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .url-pair {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .original, .cleaned {
+            word-break: break-all;
+        }
+        .original {
+            color: #666;
+        }
+        .cleaned {
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="urlContainer"></div>
+
+    <script>
+        function cleanUrl(url) {
+            if (url.includes('books.rakuten.co.jp')) {
+                return url.split('/?')[0];
+            } 
+            else if (url.includes('play.google.com')) {
+                return url.split('&')[0];
+            }
+            else if (url.includes('vitalsource.com')) {
+                return url.split('?')[0];
+            }
+            return url;
+        }
+
+        const urls = [
+            "https://books.rakuten.co.jp/rk/e6068b058b8435b98a7a0a1224c6a569/?l-id=item-c-reco-slider&rtg=c536f4e732785eedd99293e64f73c54f",
+            "https://play.google.com/store/books/details?id=CRm3EAAAQBAJ&iueyfhosh",
+            "https://www.vitalsource.com/en-uk/products/introduction-to-leadership-peter-g-northouse-v9781071884959?_gl=1*fm422b*_up*MQ..*_ga*MTM0Njg4NjQ0Ni4xNzQ2NzAzODM2*_ga_VY9NJNDJ98*czE3NDY3MDM4MzUkbzEkZzEkdDE3NDY3MDM4NzMkajAkbDAkaDA"
+        ];
+
+        const container = document.getElementById('urlContainer');
+        
+        urls.forEach(url => {
+            const div = document.createElement('div');
+            div.className = 'url-pair';
+            div.innerHTML = `
+                <div class="original">Original: ${url}</div>
+                <div class="cleaned">Cleaned: ${cleanUrl(url)}</div>
+            `;
+            container.appendChild(div);
+        });
+    </script>
+</body>
+</html>
